@@ -408,7 +408,7 @@ function addStyles() {
       padding: 10px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       z-index: 10000;
-      max-width: 300px;
+      max-width: 400px;
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -865,7 +865,7 @@ function injectUIControls() {
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       padding: 16px;
-      width: 280px;
+      width: 400px;
     }
 
     .murai-header {

@@ -107,7 +107,7 @@ function App() {
   }
 
   return (
-    <div className="container">
+    <div className="container" style={{ width: '400px' }}>
       <div className="header">
         <img src={Logo} alt="MURAi" className="logo" />
       </div>
