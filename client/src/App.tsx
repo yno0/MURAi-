@@ -165,42 +165,44 @@ function App() {
           {showWhitelistPanel && (
             <div className="whitelist-panel">
               <div className="whitelist-section">
-                <label>Whitelist Term</label>
+                <label className="whitelist-label">Whitelist Term</label>
                 <div className="input-group">
                   <input
                     type="text"
                     value={newTerm}
                     onChange={(e) => setNewTerm(e.target.value)}
                     placeholder="Enter term to whitelist"
+                    className="whitelist-input"
                   />
-                  <button onClick={() => addToWhitelist('terms', newTerm)}>Add</button>
+                  <button className="whitelist-add-btn" onClick={() => addToWhitelist('terms', newTerm)}>Add</button>
                 </div>
                 <div className="whitelist-items">
                   {whitelist.terms.map((term) => (
                     <div key={term} className="whitelist-item">
-                      <span>{term}</span>
-                      <button onClick={() => removeFromWhitelist('terms', term)}>×</button>
+                      <span className="whitelist-item-text">{term}</span>
+                      <button className="whitelist-remove-btn" onClick={() => removeFromWhitelist('terms', term)}>×</button>
                     </div>
                   ))}
                 </div>
               </div>
               
               <div className="whitelist-section">
-                <label>Whitelist Website</label>
+                <label className="whitelist-label">Whitelist Website</label>
                 <div className="input-group">
                   <input
                     type="text"
                     value={newWebsite}
                     onChange={(e) => setNewWebsite(e.target.value)}
                     placeholder="Enter website URL"
+                    className="whitelist-input"
                   />
-                  <button onClick={() => addToWhitelist('websites', newWebsite)}>Add</button>
+                  <button className="whitelist-add-btn" onClick={() => addToWhitelist('websites', newWebsite)}>Add</button>
                 </div>
                 <div className="whitelist-items">
                   {whitelist.websites.map((website) => (
                     <div key={website} className="whitelist-item">
-                      <span>{website}</span>
-                      <button onClick={() => removeFromWhitelist('websites', website)}>×</button>
+                      <span className="whitelist-item-text">{website}</span>
+                      <button className="whitelist-remove-btn" onClick={() => removeFromWhitelist('websites', website)}>×</button>
                     </div>
                   ))}
                 </div>
