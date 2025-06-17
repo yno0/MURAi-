@@ -13,6 +13,14 @@ interface UICustomization {
   showHighlight: boolean;
 }
 
+const HIGHLIGHT_COLOR_PRESETS = [
+  { name: 'Soft Red', value: '#ffcdd2' },
+  { name: 'Soft Blue', value: '#bbdefb' },
+  { name: 'Soft Yellow', value: '#fff9c4' },
+  { name: 'Soft Green', value: '#c8e6c9' },
+  { name: 'Soft Purple', value: '#e1bee7' }
+];
+
 function App() {
   const [enabled, setEnabled] = useState(false)
   const [sensitivity, setSensitivity] = useState<'low' | 'medium' | 'high'>('medium')
@@ -249,6 +257,17 @@ function App() {
               {uiCustomization.showHighlight && (
                 <div className="customization-option">
                   <label>Highlight Color</label>
+                  <div className="color-presets">
+                    {HIGHLIGHT_COLOR_PRESETS.map((color) => (
+                      <button
+                        key={color.value}
+                        className={`color-preset ${uiCustomization.highlightColor === color.value ? 'active' : ''}`}
+                        style={{ backgroundColor: color.value }}
+                        onClick={() => updateUiCustomization('highlightColor', color.value)}
+                        title={color.name}
+                      />
+                    ))}
+                  </div>
                   <input
                     type="color"
                     value={uiCustomization.highlightColor}

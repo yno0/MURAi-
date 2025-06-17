@@ -13,8 +13,8 @@ const MuraiConfig = {
   },
   whitelist: new Set(), // Words to ignore
   customColors: {
-    highlight: 'rgba(255, 0, 0, 0.05)',
-    highlightHover: 'rgba(255, 0, 0, 0.1)',
+    highlight: '#ffcdd2', // Soft red
+    highlightHover: '#ef9a9a', // Slightly darker red for hover
     tooltip: {
       background: '#ffffff',
       text: '#333333',
