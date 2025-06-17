@@ -133,162 +133,168 @@ function App() {
           </label>
         </div>
 
-        <div className="control-group">
-          <label>Language</label>
-          <div className="button-group">
-            {['tagalog', 'english', 'mixed'].map((lang) => (
-              <button
-                key={lang}
-                className={`option-button ${language === lang ? 'active' : ''}`}
-                onClick={() => handleLanguageChange(lang as 'tagalog' | 'english' | 'mixed')}
-              >
-                {lang.charAt(0).toUpperCase() + lang.slice(1)}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="control-group">
-          <label>Sensitivity</label>
-          <div className="button-group">
-            {['low', 'medium', 'high'].map((level) => (
-              <button
-                key={level}
-                className={`option-button ${sensitivity === level ? 'active' : ''}`}
-                onClick={() => handleSensitivityChange(level as 'low' | 'medium' | 'high')}
-              >
-                {level.charAt(0).toUpperCase() + level.slice(1)}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="control-group">
-          <button 
-            className="panel-toggle"
-            onClick={() => setShowWhitelistPanel(!showWhitelistPanel)}
-          >
-            {showWhitelistPanel ? 'Hide' : 'Show'} Whitelist Options
-          </button>
-          {showWhitelistPanel && (
-            <div className="whitelist-panel">
-              <div className="whitelist-section">
-                <label className="whitelist-label">Whitelist Term</label>
-                <div className="input-group">
-                  <input
-                    type="text"
-                    value={newTerm}
-                    onChange={(e) => setNewTerm(e.target.value)}
-                    placeholder="Enter term to whitelist"
-                    className="whitelist-input"
-                  />
-                  <button className="whitelist-add-btn" onClick={() => addToWhitelist('terms', newTerm)}>Add</button>
-                </div>
-                <div className="whitelist-items">
-                  {whitelist.terms.map((term) => (
-                    <div key={term} className="whitelist-item">
-                      <span className="whitelist-item-text">{term}</span>
-                      <button className="whitelist-remove-btn" onClick={() => removeFromWhitelist('terms', term)}>×</button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="whitelist-section">
-                <label className="whitelist-label">Whitelist Website</label>
-                <div className="input-group">
-                  <input
-                    type="text"
-                    value={newWebsite}
-                    onChange={(e) => setNewWebsite(e.target.value)}
-                    placeholder="Enter website URL"
-                    className="whitelist-input"
-                  />
-                  <button className="whitelist-add-btn" onClick={() => addToWhitelist('websites', newWebsite)}>Add</button>
-                </div>
-                <div className="whitelist-items">
-                  {whitelist.websites.map((website) => (
-                    <div key={website} className="whitelist-item">
-                      <span className="whitelist-item-text">{website}</span>
-                      <button className="whitelist-remove-btn" onClick={() => removeFromWhitelist('websites', website)}>×</button>
-                    </div>
-                  ))}
-                </div>
+        {enabled && (
+          <>
+            <div className="control-group">
+              <label>Language</label>
+              <div className="button-group">
+                {['tagalog', 'english', 'mixed'].map((lang) => (
+                  <button
+                    key={lang}
+                    className={`option-button ${language === lang ? 'active' : ''}`}
+                    onClick={() => handleLanguageChange(lang as 'tagalog' | 'english' | 'mixed')}
+                  >
+                    {lang.charAt(0).toUpperCase() + lang.slice(1)}
+                  </button>
+                ))}
               </div>
             </div>
-          )}
-        </div>
 
-        <div className="control-group">
-          <button 
-            className="panel-toggle"
-            onClick={() => setShowCustomizationPanel(!showCustomizationPanel)}
-          >
-            {showCustomizationPanel ? 'Hide' : 'Show'} UI Customization
-          </button>
-          {showCustomizationPanel && (
-            <div className="customization-panel">
-              <div className="customization-option">
-                <label>Flag Style</label>
-                <div className="button-group">
-                  {['asterisk', 'blur', 'highlight'].map((style) => (
-                    <button
-                      key={style}
-                      className={`option-button ${uiCustomization.flagStyle === style ? 'active' : ''}`}
-                      onClick={() => updateUiCustomization('flagStyle', style)}
-                    >
-                      {style.charAt(0).toUpperCase() + style.slice(1)}
-                    </button>
-                  ))}
-                </div>
+            <div className="control-group">
+              <label>Sensitivity</label>
+              <div className="button-group">
+                {['low', 'medium', 'high'].map((level) => (
+                  <button
+                    key={level}
+                    className={`option-button ${sensitivity === level ? 'active' : ''}`}
+                    onClick={() => handleSensitivityChange(level as 'low' | 'medium' | 'high')}
+                  >
+                    {level.charAt(0).toUpperCase() + level.slice(1)}
+                  </button>
+                ))}
               </div>
+            </div>
 
-              <div className="customization-option">
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={uiCustomization.showHighlight}
-                    onChange={(e) => updateUiCustomization('showHighlight', e.target.checked)}
-                  />
-                  <span className="checkbox-text">Show Highlight</span>
-                </label>
-              </div>
-
-              {uiCustomization.showHighlight && (
-                <div className="customization-option">
-                  <label>Highlight Color</label>
-                  <div className="color-presets">
-                    {HIGHLIGHT_COLOR_PRESETS.map((color) => (
-                      <button
-                        key={color.value}
-                        className={`color-preset ${uiCustomization.highlightColor === color.value ? 'active' : ''}`}
-                        style={{ backgroundColor: color.value }}
-                        onClick={() => updateUiCustomization('highlightColor', color.value)}
-                        title={color.name}
+            <div className="control-group">
+              <button 
+                className="panel-toggle"
+                onClick={() => setShowWhitelistPanel(!showWhitelistPanel)}
+              >
+                {showWhitelistPanel ? 'Hide' : 'Show'} Whitelist Options
+              </button>
+              {showWhitelistPanel && (
+                <div className="whitelist-panel">
+                  <div className="whitelist-section">
+                    <label className="whitelist-label">Whitelist Term</label>
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        value={newTerm}
+                        onChange={(e) => setNewTerm(e.target.value)}
+                        placeholder="Enter term to whitelist"
+                        className="whitelist-input"
                       />
-                    ))}
+                      <button className="whitelist-add-btn" onClick={() => addToWhitelist('terms', newTerm)}>Add</button>
+                    </div>
+                    <div className="whitelist-items">
+                      {whitelist.terms.map((term) => (
+                        <div key={term} className="whitelist-item">
+                          <span className="whitelist-item-text">{term}</span>
+                          <button className="whitelist-remove-btn" onClick={() => removeFromWhitelist('terms', term)}>×</button>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <input
-                    type="color"
-                    value={uiCustomization.highlightColor}
-                    onChange={(e) => updateUiCustomization('highlightColor', e.target.value)}
-                    className="color-picker"
-                  />
+                  
+                  <div className="whitelist-section">
+                    <label className="whitelist-label">Whitelist Website</label>
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        value={newWebsite}
+                        onChange={(e) => setNewWebsite(e.target.value)}
+                        placeholder="Enter website URL"
+                        className="whitelist-input"
+                      />
+                      <button className="whitelist-add-btn" onClick={() => addToWhitelist('websites', newWebsite)}>Add</button>
+                    </div>
+                    <div className="whitelist-items">
+                      {whitelist.websites.map((website) => (
+                        <div key={website} className="whitelist-item">
+                          <span className="whitelist-item-text">{website}</span>
+                          <button className="whitelist-remove-btn" onClick={() => removeFromWhitelist('websites', website)}>×</button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
-          )}
-        </div>
+
+            <div className="control-group">
+              <button 
+                className="panel-toggle"
+                onClick={() => setShowCustomizationPanel(!showCustomizationPanel)}
+              >
+                {showCustomizationPanel ? 'Hide' : 'Show'} UI Customization
+              </button>
+              {showCustomizationPanel && (
+                <div className="customization-panel">
+                  <div className="customization-option">
+                    <label>Flag Style</label>
+                    <div className="button-group">
+                      {['asterisk', 'blur', 'highlight'].map((style) => (
+                        <button
+                          key={style}
+                          className={`option-button ${uiCustomization.flagStyle === style ? 'active' : ''}`}
+                          onClick={() => updateUiCustomization('flagStyle', style)}
+                        >
+                          {style.charAt(0).toUpperCase() + style.slice(1)}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="customization-option">
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        checked={uiCustomization.showHighlight}
+                        onChange={(e) => updateUiCustomization('showHighlight', e.target.checked)}
+                      />
+                      <span className="checkbox-text">Show Highlight</span>
+                    </label>
+                  </div>
+
+                  {uiCustomization.showHighlight && (
+                    <div className="customization-option">
+                      <label>Highlight Color</label>
+                      <div className="color-presets">
+                        {HIGHLIGHT_COLOR_PRESETS.map((color) => (
+                          <button
+                            key={color.value}
+                            className={`color-preset ${uiCustomization.highlightColor === color.value ? 'active' : ''}`}
+                            style={{ backgroundColor: color.value }}
+                            onClick={() => updateUiCustomization('highlightColor', color.value)}
+                            title={color.name}
+                          />
+                        ))}
+                      </div>
+                      <input
+                        type="color"
+                        value={uiCustomization.highlightColor}
+                        onChange={(e) => updateUiCustomization('highlightColor', e.target.value)}
+                        className="color-picker"
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
 
       <div className="status-panel">
         <div className="status-text">
           Protection is {enabled ? 'enabled' : 'disabled'}
         </div>
-        <div className="status-details">
-          Language: {language.charAt(0).toUpperCase() + language.slice(1)} |
-          Sensitivity: {sensitivity.charAt(0).toUpperCase() + sensitivity.slice(1)}
-        </div>
+        {enabled && (
+          <div className="status-details">
+            Language: {language.charAt(0).toUpperCase() + language.slice(1)} |
+            Sensitivity: {sensitivity.charAt(0).toUpperCase() + sensitivity.slice(1)}
+          </div>
+        )}
       </div>
     </div>
   )
